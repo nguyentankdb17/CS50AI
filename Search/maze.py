@@ -1,4 +1,7 @@
 import sys
+import os
+
+
 class Node:
     def __init__(self, state, parent, action):
         self.state = state
@@ -120,7 +123,7 @@ class Maze():
 
         # Initialize frontier to just the starting position
         start = Node(state=self.start, parent=None, action=None)
-        frontier = StackFrontier()
+        frontier = QueueFrontier()  # Stack when DFS, Queue when BFS
         frontier.add(start)
 
         # Initialize an empty explored set
@@ -221,4 +224,7 @@ m.solve()
 print("States Explored:", m.num_explored)
 print("Solution:")
 m.print()
-m.output_image("maze.png", show_explored=True)
+output_directory = "Search"
+output_filename = "maze3BFS.png"
+output_path = os.path.join(output_directory, output_filename)
+m.output_image(output_path, show_explored=True)
